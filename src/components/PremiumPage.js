@@ -10,7 +10,7 @@ class PremiumPage extends Component {
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
                         <h1 class="display-4">Premium</h1>
-                        <p class="lead">Some Fancy Text</p>
+                        <p class="lead">Some Premium Content</p>
                     </div>
             </div>
             )

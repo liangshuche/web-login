@@ -15,9 +15,18 @@ class RegisterPage extends Component {
             ageClass: '',
             redirect: false,
             error: false,
+            account_exist: false,
         }
 
         this.socket = this.props.socket;
+
+        this.socket.on('ACCOUNT_EXIST', () => {
+            this.setState({ account_exist: true });
+        });
+
+        this.socket.on('RECEIVE_REGISTER', () => {
+            this.setState({ redirect: true });
+        })
 
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -61,9 +70,8 @@ class RegisterPage extends Component {
                 username: this.state.username,
                 password: this.state.password,
                 age: this.state.age,
-            }
-            );
-            this.setState({ redirect: true });
+            });
+            this.setState({ password: ''});
         }
         else {
             this.setState({ 
@@ -82,6 +90,13 @@ class RegisterPage extends Component {
             errBar = (
                 <div class="alert alert-danger" role="alert">
                     Please fix invalid input(s)!
+                </div>
+            );
+        }
+        else if (this.state.account_exist){
+            errBar = (
+                <div class="alert alert-danger" role="alert">
+                    Username Exists!
                 </div>
             );
         }
@@ -113,7 +128,7 @@ class RegisterPage extends Component {
                             <div class="invalid-feedback">Invalid input</div>                                                    
                         </div>
                         <div>{errBar}</div>
-                        <button type="submit" className="btn btn-outline-secondary btn-block" onClick={this.handleSubmit}>Register</button>
+                        <button type="button" className="btn btn-outline-secondary btn-block" onClick={this.handleSubmit}>Register</button>
                     </form>
                 </div>
                 <div className='col-4'></div>

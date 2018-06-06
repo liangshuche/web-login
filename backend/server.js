@@ -11,7 +11,7 @@ const server = app.listen(5000, () => {
 const io = socket(server);
 
 const userList = [
-  { username: 'tony', password: '123' , age: '20'},
+  { username: 'admin', password: '123' , age: '20'},
 ];
 
 
@@ -19,14 +19,10 @@ const userList = [
 io.on('connection', (socket) => {
   console.log(`Socket ID: ${socket.id} connected`);
 
-
   socket.on('LOGIN', (data) => {
-    console.log(data);
     let user = userList.find(function(e) {
-      console.log(e);
       return e.username === data.username;
     });
-    console.log(user);
     if ( user && user.password === data.password){
       io.emit('RECEIVE_LOGIN', data.username);    
     }
@@ -36,8 +32,18 @@ io.on('connection', (socket) => {
   });
 
   socket.on('REGISTER', (data) => {
-    userList.push(data);
-    console.log(data);
+    let user = userList.find(function(e) {
+      return e.username === data.username;
+    });
+    if( user ) {
+      io.emit('ACCOUNT_EXIST');
+      console.log('account exist error');
+    }
+    else{
+      io.emit('RECEIVE_REGISTER');
+      console.log('registration success');
+      userList.push(data);      
+    }
   });
 
   socket.on('LOGOUT', () => {
