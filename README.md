@@ -1,10 +1,8 @@
-# Web Programming Homework #4: Messenger App
+# Web Programming In-Class Hackathon: React Login App
 
-
-![ALT](https://github.com/liangshuche/web-messenger/blob/master/img/screenshot.png?raw=True)
 
 <br>
-A Messenger App powered by React and Socket.IO with an Express backend server.
+A Login App powered by React, React-router and Socket.IO with an Express backend server.
 <br>
 
 ## Usage
@@ -12,20 +10,21 @@ A Messenger App powered by React and Socket.IO with an Express backend server.
 ```
   $ npm install
 ```
-- Run Client App
-```
-  $ npm start
-```
 - Run Server App
 ```
   $ cd backend/
   $ node server.js 
 ```
+- Run Client App
+```
+  $ npm start
+```
+
 
 ## Features
 - BootStrap UI Framework
-- Message Notification
-- Responsive Input Block
-- Auto Scroll Down Chat History
+- Premium Content Requires User Login
+- Account Registration 
+- Input Validation Check
 
 <br>
